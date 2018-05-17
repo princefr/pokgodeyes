@@ -1,49 +1,82 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {FirebaseService} from './firebase.service';
-
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FirebaseService } from './firebase.service';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ParkopolyService {
-  httpOptions: any = {
+
+    isSignedIn = false;
+
+  private httpOptions: any = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-App-Type': 'prescriber'
+      'Content-Type': environment.parkopoly.header.content_type,
+      'X-App-Type': environment.parkopoly.header.x_app_type
     })
   };
 
   // noinspection TsLint
-  httpOptionsConnected: any = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'X-App-Type': 'prescriber',
-      'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwb25kb25kYUBnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9VU0VSX01BTkFHRVIsUk9MRV9VU0VSX0FETUlOLFJPTEVfVVNFUiIsImV4cCI6MTUyODAzNzgxMiwiaWF0IjoxNTI1NDQ1ODEyfQ.WTBwSjDsn1hgEe48i52cR1B9g7NBc0m-jjq0nWGx4Dc8K7DElqF7hsoRuKuBa-lGmq-pMWJgqPFGIy-RHFs1Gg'
-    })
-  };
+  private httpOptionsConnected: any;
 
-  constructor(private http: HttpClient, private firebaseService: FirebaseService) {
+  constructor(
+      private http: HttpClient,
+      private firebaseService: FirebaseService
+  ) {}
+
+  /**
+   * Get the full URI to request the api
+   * @param {string} suffix
+   * @returns {string}
+   */
+  private getURI(suffix: string): string {
+    return environment.parkopoly.domain + suffix;
   }
 
-
+    /**
+     * Get the token to request the api
+     * @param {string} username
+     * @param {string} password
+     * @returns {Subscription}
+     */
   login(username: string, password: string) {
-    return this.http.post('https://service.parkopoly.fr/api/users/authenticate', {
-      username: username,
-      password: password,
-      rememberMe: true
-    }, this.httpOptions).subscribe(res => {
+    const body = {
+        username: username,
+        password: password,
+        rememberMe: true
+    };
+    return this.http.post(this.getURI(environment.parkopoly.authenticate), body, this.httpOptions).subscribe(
+        (res: any) => {
       // console.log(res.id_token);
-
-    });
+        this.isSignedIn = true;
+        this.httpOptionsConnected = {
+          headers: new HttpHeaders(
+            {
+              'Content-Type': environment.parkopoly.header.content_type,
+              'X-App-Type': environment.parkopoly.header.x_app_type,
+              'Authorization': environment.parkopoly.header.authorization_prefix + res.id_token
+          })
+        }
+      }
+    );
   }
 
 
-  getAllConcession() {
-    return this.http.get('https://service.parkopoly.fr/api/backoffice/concessions/short', this.httpOptionsConnected);
+  /**
+   * Get all concessions
+   * @returns {Observable<ArrayBuffer>}
+   */
+  getAllConcessions(): Observable<ArrayBuffer> {
+    return this.http.get(this.getURI(environment.parkopoly.concessions), this.httpOptionsConnected);
   }
 
 
-  getallDrivers() {
-    return this.http.get('https://service.parkopoly.fr/api/backoffice/driver', this.httpOptionsConnected);
+  /**
+   * Get all drivers
+   * @returns {Observable<ArrayBuffer>}
+   */
+  getAllDrivers(): Observable<ArrayBuffer> {
+    return this.http.get(this.getURI(environment.parkopoly.driver), this.httpOptionsConnected);
   }
 
 

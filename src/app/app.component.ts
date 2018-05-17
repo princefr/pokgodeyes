@@ -1,15 +1,13 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 import {} from '@types/googlemaps';
-import {ParkopolyService} from './services/parkopoly.service';
-import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
-import {Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
-import {map, startWith} from 'rxjs/operators';
+import { ParkopolyService } from './services/parkopoly.service';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { map, startWith } from 'rxjs/operators';
 
 declare var GeoFire: any;
-declare var firebase: any;
-const driversInQuery = {};
 
 
 @Component({
@@ -20,40 +18,39 @@ const driversInQuery = {};
 
 export class AppComponent implements OnInit, AfterViewInit {
 
+  driversInQuery: any = {};
   concessionRef: AngularFireObject<any>;
   drivers: Observable<any[]>;
   concessions: Observable<any[]>;
   myControl: FormControl;
-  filtereddrivers: Observable<string[]>;
+  filteredDrivers: Observable<any[]>;
   geoFire: any;
   geoQuery: any;
   driver = new Map();
 
 
-  constructor(private parkopolyService: ParkopolyService, private db: AngularFireDatabase) {
-    this.drivers = db.list('drivers').valueChanges();
-    this.concessions = db.list('concessions').valueChanges();
-    this.myControl = new FormControl();
-    this.geoFire = new GeoFire(this.db.list('geofire').query.ref);
-
-    this.geoQuery = this.geoFire.query({
-      center: [48.841169, 2.296801],
-      radius: 10.5
-    });
-
-
-  }
+  constructor(
+      private parkopolyService: ParkopolyService,
+      private db: AngularFireDatabase
+  ) {}
 
   @ViewChild('gmap') gmapElement: ElementRef;
   map: google.maps.Map;
   radiusInKm: 4.5;
-  database: any;
-  AllData: Array<Object>;
 
 
   ngOnInit(): void {
 
-    this.filtereddrivers = this.myControl.valueChanges.pipe(startWith<string>(''), map(val => AppComponent.filter(val)));
+      this.drivers = this.db.list('drivers').valueChanges();
+      this.concessions = this.db.list('concessions').valueChanges();
+      this.myControl = new FormControl();
+      this.geoFire = new GeoFire(this.db.list('geofire').query.ref);
+
+      this.geoQuery = this.geoFire.query({
+          center: [48.841169, 2.296801],
+          radius: 10.5
+      });
+    this.filteredDrivers = this.myControl.valueChanges.pipe(startWith<string>(''), map(val => AppComponent.filter(val)));
 
   }
 
@@ -72,8 +69,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
 
-  addmarker(location, name) {
-    new google.maps.Marker({
+  addMarker(location, name): google.maps.Marker {
+    return new google.maps.Marker({
       position: location,
       map: this.map,
       title: name,
@@ -95,7 +92,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 
   addDriverMarker(location, name) {
-    const marker = new google.maps.Marker({
+    return new google.maps.Marker({
       position: location,
       map: this.map,
       title: name,
@@ -113,8 +110,6 @@ export class AppComponent implements OnInit, AfterViewInit {
         fontWeight: 'bold'
       }
     });
-
-    return marker;
   }
 
   onDriverlocation(key: string) {
@@ -148,8 +143,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
 
     // Update the query's criteria every time the circle is dragged
-
-
     const updateCriteria = _.debounce(() => {
       const latLng = circle.getCenter();
       this.geoQuery.updateCriteria({
@@ -163,7 +156,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.concessions.subscribe(res => {
       for (let i = 0; i < res.length; i++) {
-        this.addmarker(res[i].locationDto, res[i].name);
+        this.addMarker(res[i].locationDto, res[i].name);
       }
 
 
@@ -175,7 +168,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
 
     this.geoQuery.on('key_entered', (key, location, distance) => {
-      driversInQuery[key] = true;
+      this.driversInQuery[key] = true;
       // this.addDriverMarker(location, "prince")
 
       this.db.list('drivers', ref => ref.orderByKey().equalTo(key)).valueChanges().subscribe((res: any) => {
