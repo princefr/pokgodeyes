@@ -8,7 +8,7 @@ import * as GeoFire from 'geofire';
 
 
 @Injectable()
-export class GeoService {
+export class GeofireService {
 
 
   constructor(private http: HttpClient, db: AngularFireDatabase) {

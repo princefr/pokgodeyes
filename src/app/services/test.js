@@ -38,7 +38,7 @@ geoQuery.on("key_entered", function(vehicleId, vehicleLocation) {
   // Look up the vehicle's data in the Transit Open Data Set
   transitFirebaseRef.child("sf-muni/vehicles").child(vehicleId).once("value", function(dataSnapshot) {
     // Get the vehicle data from the Open Data Set
-    vehicle = dataSnapshot.val();
+    var vehicle = dataSnapshot.val();
 
     // If the vehicle has not already exited this query in the time it took to look up its data in the Open Data
     // Set, add it to the map

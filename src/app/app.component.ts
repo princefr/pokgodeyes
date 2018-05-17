@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
-import {ParkopolyService} from './providers/parkopoly';
+import {} from '@types/googlemaps';
+import {ParkopolyService} from './services/parkopoly.service';
 import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 
-declare var google: any;
 declare var GeoFire: any;
 declare var firebase: any;
 const driversInQuery = {};
@@ -53,13 +53,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.filtereddrivers = this.myControl.valueChanges.pipe(startWith<string>(''), map(val => this.filter(val)));
+    this.filtereddrivers = this.myControl.valueChanges.pipe(startWith<string>(''), map(val => AppComponent.filter(val)));
 
   }
 
-  filter(val: string): string[] {
+  static filter(val: string): string[] {
     console.log('this is my val' + ' ' + val);
-
+    return null;
   }
 
   updateValue(concessionid: string, value: object) {
@@ -67,7 +67,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   /* Returns true if the two inputted coordinates are approximately equivalent */
-  coordinatesAreEquivalent(coord1, coord2) {
+  static coordinatesAreEquivalent(coord1, coord2): boolean {
     return (Math.abs(coord1 - coord2) < 0.000001);
   }
 
@@ -150,7 +150,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     // Update the query's criteria every time the circle is dragged
 
 
-    const updateCriteria = _.debounce(function () {
+    const updateCriteria = _.debounce(() => {
       const latLng = circle.getCenter();
       this.geoQuery.updateCriteria({
         center: [latLng.lat(), latLng.lng()],
@@ -178,15 +178,12 @@ export class AppComponent implements OnInit, AfterViewInit {
       driversInQuery[key] = true;
       // this.addDriverMarker(location, "prince")
 
-      this.db.list('drivers', ref => ref.orderByKey().equalTo(key)).valueChanges().subscribe(res => {
+      this.db.list('drivers', ref => ref.orderByKey().equalTo(key)).valueChanges().subscribe((res: any) => {
         this.driver.set(key, this.addDriverMarker(new google.maps.LatLng(location[0], location[1]), res[0].login));
-
       });
-
 
       console.log(key + ' entered query at ' + location + ' (' + distance + ' km from center)');
     });
-
 
     this.geoQuery.on('key_exited', (key, location, distance) => {
       console.log(key + ' exited query to ' + location + ' (' + distance + ' km from center)');
@@ -195,39 +192,32 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.geoQuery.on('key_moved', (key, location, distance) => {
       console.log(JSON.stringify('j\'aibouge'));
       const marker = this.driver.get(key);
-      marker.animatedMoveTo(location, marker);
-
+      this.animatedMoveTo(marker, location);
     });
-
-
-    /* Animates the Marker class (based on https://stackoverflow.com/a/10906464) */
-    google.maps.Marker.prototype.animatedMoveTo = (newLocation, marker) => {
-      const toLat = newLocation[0];
-      const toLng = newLocation[1];
-
-      const fromLat = marker.getPosition().lat();
-      const fromLng = marker.getPosition().lng();
-
-
-      if (!this.coordinatesAreEquivalent(fromLat, toLat) || !this.coordinatesAreEquivalent(fromLng, toLng)) {
-        let percent = 0;
-        const latDistance = toLat - fromLat;
-        const lngDistance = toLng - fromLng;
-        const interval = window.setInterval(() => {
-          percent += 0.01;
-          const curLat = fromLat + (percent * latDistance);
-          const curLng = fromLng + (percent * lngDistance);
-          const pos = new google.maps.LatLng(curLat, curLng);
-          marker.setPosition(pos);
-          if (percent >= 1) {
-            window.clearInterval(interval);
-          }
-        }, 50);
-      }
-    };
-
-
   }
 
+    public animatedMoveTo(marker: google.maps.Marker, newLocation: any): void{
+        const toLat = newLocation[0];
+        const toLng = newLocation[1];
+
+        const fromLat = marker.getPosition().lat();
+        const fromLng = marker.getPosition().lng();
+
+        if (!AppComponent.coordinatesAreEquivalent(fromLat, toLat) || !AppComponent.coordinatesAreEquivalent(fromLng, toLng)) {
+            let percent = 0;
+            const latDistance = toLat - fromLat;
+            const lngDistance = toLng - fromLng;
+            const interval = window.setInterval(() => {
+                percent += 0.01;
+                const curLat = fromLat + (percent * latDistance);
+                const curLng = fromLng + (percent * lngDistance);
+                const pos = new google.maps.LatLng(curLat, curLng);
+                marker.setPosition(pos);
+                if (percent >= 1) {
+                    window.clearInterval(interval);
+                }
+            }, 50);
+        }
+    }
 
 }
