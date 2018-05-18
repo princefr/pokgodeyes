@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
 import {} from '@types/googlemaps';
-import { ParkopolyService } from './services/parkopoly.service';
-import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
-import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { map, startWith } from 'rxjs/operators';
+import {ParkopolyService} from './services/parkopoly.service';
+import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
+import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {map, startWith} from 'rxjs/operators';
 
 declare var GeoFire: any;
 
@@ -34,41 +34,38 @@ export class AppComponent implements OnInit, AfterViewInit {
   radiusInKm: 4.5;
 
   static filter(val: string): string[] {
-      console.log('this is my val' + ' ' + val);
-      return null;
+    console.log('this is my val' + ' ' + val);
+    return null;
   }
 
   /* Returns true if the two inputted coordinates are approximately equivalent */
   static coordinatesAreEquivalent(coord1, coord2): boolean {
-      return (Math.abs(coord1 - coord2) < 0.000001);
+    return (Math.abs(coord1 - coord2) < 0.000001);
   }
 
   constructor(
-      private parkopolyService: ParkopolyService,
-      private db: AngularFireDatabase
-  ) {}
-
-
+    private parkopolyService: ParkopolyService,
+    private db: AngularFireDatabase
+  ) {
+  }
 
 
   ngOnInit(): void {
 
-      this.driverPosition = this.db.list('drivers').valueChanges();
-      // this.concessions = db.list('concessions').valueChanges();
-      this.concessions = this.parkopolyService.getAllConcessions();
-      this.drivers = this.parkopolyService.getAllDrivers();
-      this.myControl = new FormControl();
-      this.geoFire = new GeoFire(this.db.list('geofire').query.ref);
+    this.driverPosition = this.db.list('drivers').valueChanges();
+    // this.concessions = db.list('concessions').valueChanges();
+    this.concessions = this.parkopolyService.getAllConcessions();
+    this.drivers = this.parkopolyService.getAllDrivers();
+    this.myControl = new FormControl();
+    this.geoFire = new GeoFire(this.db.list('geofire').query.ref);
 
-      this.geoQuery = this.geoFire.query({
-          center: [48.841169, 2.296801],
-          radius: 10.5
-      });
+    this.geoQuery = this.geoFire.query({
+      center: [48.841169, 2.296801],
+      radius: 10.5
+    });
     this.filteredDrivers = this.myControl.valueChanges.pipe(startWith<string>(''), map(val => AppComponent.filter(val)));
 
   }
-
-
 
 
   addMarker(location, name): google.maps.Marker {
@@ -189,28 +186,28 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-    public animatedMoveTo(marker: google.maps.Marker, newLocation: any): void {
-        const toLat = newLocation[0];
-        const toLng = newLocation[1];
+  public animatedMoveTo(marker: google.maps.Marker, newLocation: any): void {
+    const toLat = newLocation[0];
+    const toLng = newLocation[1];
 
-        const fromLat = marker.getPosition().lat();
-        const fromLng = marker.getPosition().lng();
+    const fromLat = marker.getPosition().lat();
+    const fromLng = marker.getPosition().lng();
 
-        if (!AppComponent.coordinatesAreEquivalent(fromLat, toLat) || !AppComponent.coordinatesAreEquivalent(fromLng, toLng)) {
-            let percent = 0;
-            const latDistance = toLat - fromLat;
-            const lngDistance = toLng - fromLng;
-            const interval = window.setInterval(() => {
-                percent += 0.01;
-                const curLat = fromLat + (percent * latDistance);
-                const curLng = fromLng + (percent * lngDistance);
-                const pos = new google.maps.LatLng(curLat, curLng);
-                marker.setPosition(pos);
-                if (percent >= 1) {
-                    window.clearInterval(interval);
-                }
-            }, 50);
+    if (!AppComponent.coordinatesAreEquivalent(fromLat, toLat) || !AppComponent.coordinatesAreEquivalent(fromLng, toLng)) {
+      let percent = 0;
+      const latDistance = toLat - fromLat;
+      const lngDistance = toLng - fromLng;
+      const interval = window.setInterval(() => {
+        percent += 0.01;
+        const curLat = fromLat + (percent * latDistance);
+        const curLng = fromLng + (percent * lngDistance);
+        const pos = new google.maps.LatLng(curLat, curLng);
+        marker.setPosition(pos);
+        if (percent >= 1) {
+          window.clearInterval(interval);
         }
+      }, 50);
     }
+  }
 
 }

@@ -1,16 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { ParkopolyService } from './services/parkopoly.service';
-import { FirebaseService } from './services/firebase.service';
-import { environment } from '../environments/environment';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {AppComponent} from './app.component';
+import {ParkopolyService} from './services/parkopoly.service';
+import {FirebaseService} from './services/firebase.service';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatAutocompleteModule, MatDividerModule, MatIconModule, MatListModule, MatSidenavModule, MatFormFieldModule,
-  MatInputModule
+  MatAutocompleteModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -38,7 +43,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   providers: [ParkopolyService, FirebaseService],
   bootstrap: [AppComponent]
 })
-export class AppModule  {
+export class AppModule {
 
 
 }

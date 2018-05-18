@@ -1,9 +1,6 @@
-import {Injectable, OnInit} from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
-import {AngularFireDatabase, AngularFireObject} from 'angularfire2/database';
-import { Observable } from 'rxjs';
-
-
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {AngularFireDatabase} from 'angularfire2/database';
 
 
 @Injectable()
@@ -13,15 +10,6 @@ export class FirebaseService {
   constructor(private http: HttpClient, db: AngularFireDatabase) {
 
   }
-
-
-
-
-
-
-
-
-
 
 
 }

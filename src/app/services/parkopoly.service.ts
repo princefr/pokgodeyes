@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FirebaseService } from './firebase.service';
-import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {FirebaseService} from './firebase.service';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ParkopolyService {
 
-    isSignedIn = false;
+  isSignedIn = false;
 
   private httpOptions: any = {
     headers: new HttpHeaders({
@@ -20,9 +20,10 @@ export class ParkopolyService {
   private httpOptionsConnected: any;
 
   constructor(
-      private http: HttpClient,
-      private firebaseService: FirebaseService
-  ) {}
+    private http: HttpClient,
+    private firebaseService: FirebaseService
+  ) {
+  }
 
   /**
    * Get the full URI to request the api
@@ -33,21 +34,21 @@ export class ParkopolyService {
     return environment.parkopoly.domain + suffix;
   }
 
-    /**
-     * Get the token to request the api
-     * @param {string} username
-     * @param {string} password
-     * @returns {Subscription}
-     */
+  /**
+   * Get the token to request the api
+   * @param {string} username
+   * @param {string} password
+   * @returns {Subscription}
+   */
   login(username: string, password: string) {
     const body = {
-        username: username,
-        password: password,
-        rememberMe: true
+      username: username,
+      password: password,
+      rememberMe: true
     };
     return this.http.post(this.getURI(environment.parkopoly.authenticate), body, this.httpOptions).subscribe(
-        (res: any) => {
-      // console.log(res.id_token);
+      (res: any) => {
+        // console.log(res.id_token);
         this.isSignedIn = true;
         this.httpOptionsConnected = {
           headers: new HttpHeaders(
@@ -55,8 +56,8 @@ export class ParkopolyService {
               'Content-Type': environment.parkopoly.header.content_type,
               'X-App-Type': environment.parkopoly.header.x_app_type,
               'Authorization': environment.parkopoly.header.authorization_prefix + res.id_token
-          })
-        }
+            })
+        };
       }
     );
   }
