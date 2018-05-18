@@ -20,29 +20,43 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   driversInQuery: any = {};
   concessionRef: AngularFireObject<any>;
-  drivers: Observable<any[]>;
-  concessions: Observable<any[]>;
+  driverPosition: Observable<any[]>;
+  concessions: any;
   myControl: FormControl;
   filteredDrivers: Observable<any[]>;
   geoFire: any;
   geoQuery: any;
   driver = new Map();
+  drivers: any;
 
+  @ViewChild('gmap') gmapElement: ElementRef;
+  map: google.maps.Map;
+  radiusInKm: 4.5;
+
+  static filter(val: string): string[] {
+      console.log('this is my val' + ' ' + val);
+      return null;
+  }
+
+  /* Returns true if the two inputted coordinates are approximately equivalent */
+  static coordinatesAreEquivalent(coord1, coord2): boolean {
+      return (Math.abs(coord1 - coord2) < 0.000001);
+  }
 
   constructor(
       private parkopolyService: ParkopolyService,
       private db: AngularFireDatabase
   ) {}
 
-  @ViewChild('gmap') gmapElement: ElementRef;
-  map: google.maps.Map;
-  radiusInKm: 4.5;
+
 
 
   ngOnInit(): void {
 
-      this.drivers = this.db.list('drivers').valueChanges();
-      this.concessions = this.db.list('concessions').valueChanges();
+      this.driverPosition = this.db.list('drivers').valueChanges();
+      // this.concessions = db.list('concessions').valueChanges();
+      this.concessions = this.parkopolyService.getAllConcessions();
+      this.drivers = this.parkopolyService.getAllDrivers();
       this.myControl = new FormControl();
       this.geoFire = new GeoFire(this.db.list('geofire').query.ref);
 
@@ -54,19 +68,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  static filter(val: string): string[] {
-    console.log('this is my val' + ' ' + val);
-    return null;
-  }
 
-  updateValue(concessionid: string, value: object) {
-    this.concessionRef = this.db.object('consessions/' + concessionid);
-  }
-
-  /* Returns true if the two inputted coordinates are approximately equivalent */
-  static coordinatesAreEquivalent(coord1, coord2): boolean {
-    return (Math.abs(coord1 - coord2) < 0.000001);
-  }
 
 
   addMarker(location, name): google.maps.Marker {
@@ -158,8 +160,6 @@ export class AppComponent implements OnInit, AfterViewInit {
       for (let i = 0; i < res.length; i++) {
         this.addMarker(res[i].locationDto, res[i].name);
       }
-
-
     });
 
 
@@ -189,7 +189,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     });
   }
 
-    public animatedMoveTo(marker: google.maps.Marker, newLocation: any): void{
+    public animatedMoveTo(marker: google.maps.Marker, newLocation: any): void {
         const toLat = newLocation[0];
         const toLng = newLocation[1];
 
