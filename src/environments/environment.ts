@@ -4,27 +4,35 @@
 
 export const environment = {
   production: false,
-  fb_api_conf: {
-    apiKey: 'AIzaSyD4L_VCxXmKvQhfjJXLigfAO81i_VVyfbI',
-    authDomain: 'parkopoly-valets.firebaseapp.com',
-    databaseURL: 'https://parkopoly-valets.firebaseio.com',
-    projectId: 'parkopoly-valets',
-    storageBucket: 'parkopoly-valets.appspot.com',
-    messagingSenderId: '220509437706'
-  },
+  // fb_api_conf: {
+  //     apiKey: 'AIzaSyBfYPWiHu2-21cmWUtptgzFxynWKYISHTo',
+  //     authDomain: 'parkopoly-prod.firebaseapp.com',
+  //     databaseURL: 'https://parkopoly-prod.firebaseio.com',
+  //     projectId: 'parkopoly-prod',
+  //     storageBucket: 'parkopoly-prod.appspot.com',
+  //     messagingSenderId: '297569745235'
+  // },
+    firebase: {
+            apiKey: 'AIzaSyBfYPWiHu2-21cmWUtptgzFxynWKYISHTo',
+            authDomain: 'parkopoly-prod.firebaseapp.com',
+            databaseURL: 'https://parkopoly-prod.firebaseio.com',
+            projectId: 'parkopoly-prod',
+            storageBucket: 'parkopoly-prod.appspot.com',
+            messagingSenderId: '297569745235'
+    },
   parkopoly: {
     domain: 'https://service-test.parkopoly.fr',
     authenticate: '/api/users/authenticate',
     concessions: '/api/backoffice/concessions/short',
-    driver: 'api/backoffice/driver',
+    driver: '/api/backoffice/driver',
     header: {
       content_type: 'application/json',
       x_app_type: 'prescriber',
       authorization_prefix: 'Bearer '
     }
   },
-
 };
+
 
 /*
  * In development mode, to ignore zone related error stack frames such as

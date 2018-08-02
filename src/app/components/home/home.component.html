@@ -1,0 +1,60 @@
+<div class="parent">
+    <mat-toolbar class="child-top">
+        <mat-toolbar-row>
+            <img src="assets/logo_pk.svg" height="40"/>
+            <div class="example-spacer">
+                <form class="example-form">
+                    <mat-form-field appearance="standard" class="example-full-width">
+                        <input  matInput ngx-google-places-autocomplete #placesRef="ngx-places"    [formControl]='PlaceInputControl' (onAddressChange)="handleAddressChange($event)" />
+                    </mat-form-field>
+                </form>
+            </div>
+            <mat-form-field class="example-icon">
+                <mat-select placeholder="Ville" [(value)]="selected"  (selectionChange)="updateGeolocation($event.value)">
+                    <mat-option *ngFor="let city of cities" [value]="city.ville">
+                        {{city.ville}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-icon class="example-icon"  matBadge="8" matBadgePosition="after" >notifications</mat-icon>
+            <mat-icon class="example-icon" [matMenuTriggerFor]="appMenu">person</mat-icon>
+        </mat-toolbar-row>
+
+        <mat-menu #appMenu="matMenu">
+            <ng-template matMenuContent>
+                <button mat-menu-item>Comptes</button>
+                <button mat-menu-item>Paramètres</button>
+                <button mat-menu-item>Developpeurs</button>
+                <button mat-menu-item (click)="deconecte()">Se déconnecter</button>
+            </ng-template>
+        </mat-menu>
+    </mat-toolbar>
+
+
+
+
+
+    <mat-drawer-container class="example-container">
+        <mat-drawer mode="side" opened class="sideNav">
+            <mat-list>
+                <mat-list-item *ngFor="let driver of drivers | async; index as i"    (click)="FollowOneUser(driver, 1)" [ngClass]="{'user-active': (ActiveUserIndex | async) === i}">
+
+                    <img matListAvatar src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y" alt="...">
+                    <h3 matLine> {{driver.firstname}} {{driver.lastname}} </h3>
+                    <p matLine>
+                        <span style="font-size:11px"> {{driver.LastAdress}} </span>
+                    </p>
+                    <p matLine class="demo-2" *ngIf="driver.InMoveStatus === 'Inactif' "> Inactif depuis {{driver.lastTimeSeen | amLocale:'fr' | amTimeAgo:true}} </p>
+                    <img src="../../../assets/moving.svg" class="right" height="20" width="20" *ngIf="driver.InMoveStatus === 'Actif'"/>
+                    <img src="../../../assets/stopped.svg" class="right" height="20" width="20" *ngIf="driver.InMoveStatus === 'Inactif'"/>
+                </mat-list-item>
+            </mat-list>
+
+        </mat-drawer>
+
+        <mat-drawer-content>
+            <div #gmap class="mapColum"></div>
+
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

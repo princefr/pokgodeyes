@@ -1,0 +1,29 @@
+<div class="parent">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading === 'isLoading' " [value]="10" [mode]="mode" color="warn"></mat-progress-bar>
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened class="sideNav">
+
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-toolbar-row>
+        <img src="assets/logo_pk.svg" style="margin-left: 20px; margin-top: 10px" height="40"/>
+      </mat-toolbar-row>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Email"  #email required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Mot de passe" [type]="hide ? 'password' : 'text'" #password required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+
+
+        <button mat-flat-button class="LoginButton" color="warn" (click)="login(email.value, password.value)">Se connecter</button>
+      </form>
+
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
