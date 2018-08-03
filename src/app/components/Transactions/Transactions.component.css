@@ -1,3 +1,134 @@
-.testing {
-    
+.success {
+    position: absolute;
+    z-index: 1;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 30px;
+
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+}
+
+@keyframes success {
+    from{ bottom:-100px; opacity:0 }
+    to{ bottom:0; opacity:1 }
+}
+
+@-webkit-keyframes success {
+    from { bottom:-100px; opacity:0 }
+    to { bottom:0px; opacity:1 }
+}
+
+.formDiv {
+    position: relative;
+}
+
+
+#myDiv {
+    display: none;
+    text-align: center;
+}
+
+.success .icon .border {
+    stroke: limegreen;
+}
+
+.success .icon .checkmark {
+    stroke: limegreen;
+}
+
+.success .title {
+    color: #fff;
+}
+
+.success .message {
+    color: limegreen;
+}
+
+.success .reset path {
+    fill: #fff;
+}
+
+
+input, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    border-style: none;
+}
+
+button {
+    display: block;
+    width: calc(100% - 30px);
+    height: 40px;
+    margin: 40px 15px 0;
+    background-color: orangered;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 orangered;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+button:active {
+    background-color: orangered;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 orangered;
+}
+
+
+button:disabled {
+    background-color: #6b7c93;
+    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 #6b7c93;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-top: 40px;
+}
+
+
+.StripeElement {
+    width: 100%;
+    padding: 11px 15px 11px 0;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fce883;
+    transition: background-color 100000000s;
+    -webkit-animation: 1ms void-animation-out;
+}
+
+
+.StripeElement--webkit-autofill {
+    background: transparent !important;
+}
+
+
+ input::-webkit-input-placeholder {
+    color: #87bbfd;
+}
+
+ input::-moz-placeholder {
+    color: #87bbfd;
+}
+
+ input:-ms-input-placeholder {
+    color: #87bbfd;
+}
+
+* {
+    font-family: Roboto, Open Sans, Segoe UI, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
 }

@@ -497,7 +497,7 @@ var AppModule = /** @class */ (function () {
                 _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_16__["CustomerComponent"],
                 _components_payment_payment_component__WEBPACK_IMPORTED_MODULE_17__["PaymentComponent"],
                 _components_invoice_invoice_component__WEBPACK_IMPORTED_MODULE_18__["InvoiceComponent"],
-                _components_create_transaction_create_transaction_component__WEBPACK_IMPORTED_MODULE_19__["CreateTransactionComponent"]
+                _components_create_transaction_create_transaction_component__WEBPACK_IMPORTED_MODULE_19__["TransactionComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -563,12 +563,12 @@ module.exports = "<p>\n  Transactions works!\n</p>\n"
 /*!********************************************************************************!*\
   !*** ../src/app/components/Transactions/Transactions.component.ts ***!
   \********************************************************************************/
-/*! exports provided: CreateTransactionComponent */
+/*! exports provided: TransactionComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateTransactionComponent", function() { return CreateTransactionComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionComponent", function() { return CreateTransactionComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/fesm5/core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

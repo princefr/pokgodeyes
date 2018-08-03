@@ -366,9 +366,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
 
     FollowOneUser(Driver: Drivers, index) {
-        console.log(Driver)
-        const key = _.findKey(this.DriversObject, Driver);
-       console.log('yataaaa' + '   ' + key);
+        //console.log(Driver)
+        //const key = _.findKey(this.DriversObject, Driver);
+       //console.log('yataaaa' + '   ' + key);
       // this.ActiveUserIndex.next(index);
     }
 

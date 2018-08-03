@@ -30,7 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
-import { CreateTransactionComponent } from './components/Transactions/Transactions.component';
+import { TransactionComponent } from './components/Transactions/Transactions.component';
 import {MomentModule} from 'ngx-moment';
 import {GooglePlaceModule} from 'ngx-google-places-autocomplete';
 import {MatSidenavModule} from '@angular/material';
@@ -47,7 +47,7 @@ import { CustomerMapFollowComponent } from './components/customer-map-follow/cus
     CustomerComponent,
     PaymentComponent,
     InvoiceComponent,
-    CreateTransactionComponent,
+    TransactionComponent,
     CustomerMapFollowComponent
   ],
   imports: [

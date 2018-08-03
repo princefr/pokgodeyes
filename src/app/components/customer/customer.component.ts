@@ -4,6 +4,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs';
 // import * as Stripe from 'stripe';
 // const stripe = new Stripe('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+
 // declare var Stripe: any
 // const stripe  = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
