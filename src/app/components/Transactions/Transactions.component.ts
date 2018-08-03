@@ -12,7 +12,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Observable} from 'rxjs';
 import {ParkopolyService} from '../../services/parkopoly.service';
 declare var Stripe: any;
-const stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+const stripe = Stripe('pk_test_u5TNHz0JoVOZETfAjKVrkIw2');
 const elements = stripe.elements();
 
 @Component({
@@ -32,8 +32,11 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
     cardHandler = this.onChange.bind(this);
     error: string;
     paymentInQuestion: Observable<{}>;
-    PaymentObject: object;
+    PaymentObject: any;
     TransactionID: string;
+    Amount = '';
+    AmountToPay: number
+    loading = '';
 
 
   constructor(private cd: ChangeDetectorRef, private route: ActivatedRoute, private db: AngularFireDatabase, private PkService: ParkopolyService) { }
@@ -45,8 +48,10 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
         this.TransactionID = params['id'];
           this.paymentInQuestion =  this.db.object('Transactions/' + params['id']).valueChanges();
           this.paymentInQuestion.subscribe(res =>  {
-            this.PaymentObject = res;
-            if (res.payed === 'false') {
+              this.Amount = res['amount'] + '€';
+              this.AmountToPay = res['amount']
+            console.log(res)
+            if (res['payed'] === false) {
               this.setNormalBlock();
             } else {
                 this.setSuccess();
@@ -78,15 +83,17 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     async onSubmit(form: NgForm) {
-        const { token, error } = await stripe.createToken(this.card);
         this.SubmitButton.nativeElement.setAttribute('disabled', 'disabled');
+        this.loading = 'isLoading'
+        const { token, error } = await stripe.createToken(this.card);
         if (error) {
             console.log('Something is wrong:', error);
         } else {
-          this.PkService.MakePayment((this.PaymentObject.amount * 100),  token.id, 'nothing', this.TransactionID).subscribe(res => {
+          this.PkService.MakePayment((this.AmountToPay * 100),  token.id, 'nothing', this.TransactionID).subscribe(res => {
               this.setSuccess();
+              this.loading = '';
           }, (err) => {
-            console.log(JOSN.stringify(err));
+            console.log(JSON.stringify(err));
           });
         }
     }

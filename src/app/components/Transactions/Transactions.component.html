@@ -1,4 +1,4 @@
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading === 'isLoading' " [value]="10" [mode]="mode" color="warn"></mat-progress-bar>
 
 <img src="assets/logo_pk.svg" height="40" class="center"/>
 
@@ -11,7 +11,7 @@
         <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
       </div>
 
-      <button type="submit" data-tid="elements_examples.form.pay_button" #SubmitButton>Payer {{paymentInQuestion.amount}}  €</button>
+      <button type="submit" data-tid="elements_examples.form.pay_button" #SubmitButton>Payer {{Amount}}</button>
     </form>
   </div>
 
@@ -23,8 +23,8 @@
         <path class="checkmark" stroke-linecap="round" stroke-linejoin="round" d="M23.375 42.5488281 36.8840688 56.0578969 64.891932 28.0500338" stroke-width="4" stroke="#000" fill="none"></path>
       </svg>
     </div>
-    <h3 class="title" data-tid="elements_examples.success.title">Payment successful</h3>
-    <p class="message"><span data-tid="elements_examples.success.message">Thanks for trying Stripe Elements. No money was charged, but we generated a token: </span><span class="token">tok_189gMN2eZvKYlo2CwTBv9KKh</span></p>
+    <h3 class="title" data-tid="elements_examples.success.title">Paiement effectué</h3>
+    <p class="message"><span data-tid="elements_examples.success.message">Merci d'avoir essayé ParkopolyPay. Aucuns fonds n'ont été débités </span></p>
   </div>
 </div>
 

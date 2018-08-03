@@ -319,6 +319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_iSConnected_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/iSConnected.service */ "../src/app/services/iSConnected.service.ts");
 /* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/login/login.component */ "../src/app/components/login/login.component.ts");
 /* harmony import */ var _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/customer/customer.component */ "../src/app/components/customer/customer.component.ts");
+/* harmony import */ var _components_Transactions_Transactions_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Transactions/Transactions.component */ "../src/app/components/Transactions/Transactions.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -331,12 +332,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 // canActivate: [ISConnectedService]
 var routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"], canActivate: [_services_iSConnected_service__WEBPACK_IMPORTED_MODULE_3__["ISConnectedService"]] },
+    { path: 'home', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"] },
     { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_4__["LoginComponent"] },
-    { path: 'customer', component: _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_5__["CustomerComponent"] }
+    { path: 'customer', component: _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_5__["CustomerComponent"] },
+    { path: 'transactions/:id', component: _components_Transactions_Transactions_component__WEBPACK_IMPORTED_MODULE_6__["TransactionComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -449,17 +452,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/customer/customer.component */ "../src/app/components/customer/customer.component.ts");
 /* harmony import */ var _components_payment_payment_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/payment/payment.component */ "../src/app/components/payment/payment.component.ts");
 /* harmony import */ var _components_invoice_invoice_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/invoice/invoice.component */ "../src/app/components/invoice/invoice.component.ts");
-/* harmony import */ var _components_create_transaction_create_transaction_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Transactions/Transactions.component */ "../src/app/components/Transactions/Transactions.component.ts");
+/* harmony import */ var _components_Transactions_Transactions_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/Transactions/Transactions.component */ "../src/app/components/Transactions/Transactions.component.ts");
 /* harmony import */ var ngx_moment__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ngx-moment */ "../node_modules/ngx-moment/esm5/ngx-moment.js");
 /* harmony import */ var ngx_google_places_autocomplete__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ngx-google-places-autocomplete */ "../node_modules/ngx-google-places-autocomplete/bundles/ngx-google-places-autocomplete.umd.js");
 /* harmony import */ var ngx_google_places_autocomplete__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(ngx_google_places_autocomplete__WEBPACK_IMPORTED_MODULE_21__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/platform-browser/animations */ "../node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _components_customer_map_follow_customer_map_follow_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/customer-map-follow/customer-map-follow.component */ "../src/app/components/customer-map-follow/customer-map-follow.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -497,7 +502,8 @@ var AppModule = /** @class */ (function () {
                 _components_customer_customer_component__WEBPACK_IMPORTED_MODULE_16__["CustomerComponent"],
                 _components_payment_payment_component__WEBPACK_IMPORTED_MODULE_17__["PaymentComponent"],
                 _components_invoice_invoice_component__WEBPACK_IMPORTED_MODULE_18__["InvoiceComponent"],
-                _components_create_transaction_create_transaction_component__WEBPACK_IMPORTED_MODULE_19__["TransactionComponent"]
+                _components_Transactions_Transactions_component__WEBPACK_IMPORTED_MODULE_19__["TransactionComponent"],
+                _components_customer_map_follow_customer_map_follow_component__WEBPACK_IMPORTED_MODULE_23__["CustomerMapFollowComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -524,7 +530,7 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatFormFieldModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_13__["ReactiveFormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_13__["FormsModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatInputModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_12__["MatInputModule"],
             ],
             providers: [_services_parkopoly_service__WEBPACK_IMPORTED_MODULE_4__["ParkopolyService"], _services_firebase_service__WEBPACK_IMPORTED_MODULE_5__["FirebaseService"], _services_iSConnected_service__WEBPACK_IMPORTED_MODULE_11__["ISConnectedService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -537,10 +543,210 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "../src/app/components/create-transaction/create-transaction.component.css":
-/*!*********************************************************************************!*\
+/***/ "../src/app/components/Transactions/Transactions.component.css":
+/*!*********************************************************************!*\
   !*** ../src/app/components/Transactions/Transactions.component.css ***!
-  \*********************************************************************************/
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".success {\n    position: absolute;\n    z-index: 1;\n    text-align: center;\n    margin-left: 10px;\n    margin-right: 10px;\n    margin-top: 30px;\n\n    -webkit-animation-name: animatebottom;\n    -webkit-animation-duration: 1s;\n    animation-name: animatebottom;\n    animation-duration: 1s\n}\n\n@keyframes success {\n    from{ bottom:-100px; opacity:0 }\n    to{ bottom:0; opacity:1 }\n}\n\n@-webkit-keyframes success {\n    from { bottom:-100px; opacity:0 }\n    to { bottom:0px; opacity:1 }\n}\n\n.formDiv {\n    position: relative;\n}\n\n#myDiv {\n    display: none;\n    text-align: center;\n}\n\n.success .icon .border {\n    stroke: limegreen;\n}\n\n.success .icon .checkmark {\n    stroke: limegreen;\n}\n\n.success .title {\n    color: #fff;\n}\n\n.success .message {\n    color: limegreen;\n}\n\n.success .reset path {\n    fill: #fff;\n}\n\ninput, button {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n    outline: none;\n    border-style: none;\n}\n\nbutton {\n    display: block;\n    width: calc(100% - 30px);\n    height: 40px;\n    margin: 40px 15px 0;\n    background-color: orangered;\n    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),\n    inset 0 1px 0 orangered;\n    border-radius: 4px;\n    color: #fff;\n    font-weight: 600;\n    cursor: pointer;\n}\n\nbutton:active {\n    background-color: orangered;\n    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),\n    inset 0 1px 0 orangered;\n}\n\nbutton:disabled {\n    background-color: #6b7c93;\n    box-shadow: 0 6px 9px rgba(50, 50, 93, 0.06), 0 2px 5px rgba(0, 0, 0, 0.08),\n    inset 0 1px 0 #6b7c93;\n}\n\n.center {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n    width: 50%;\n    margin-top: 40px;\n}\n\n.StripeElement {\n    width: 100%;\n    padding: 11px 15px 11px 0;\n}\n\ninput:-webkit-autofill {\n    -webkit-text-fill-color: #fce883;\n    transition: background-color 100000000s;\n    -webkit-animation: 1ms void-animation-out;\n}\n\n.StripeElement--webkit-autofill {\n    background: transparent !important;\n}\n\ninput::-webkit-input-placeholder {\n    color: #87bbfd;\n}\n\ninput::-moz-placeholder {\n    color: #87bbfd;\n}\n\ninput:-ms-input-placeholder {\n    color: #87bbfd;\n}\n\n* {\n    font-family: Roboto, Open Sans, Segoe UI, sans-serif;\n    font-size: 16px;\n    font-weight: 500;\n}"
+
+/***/ }),
+
+/***/ "../src/app/components/Transactions/Transactions.component.html":
+/*!**********************************************************************!*\
+  !*** ../src/app/components/Transactions/Transactions.component.html ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-progress-bar mode=\"indeterminate\"></mat-progress-bar>\n\n<img src=\"assets/logo_pk.svg\" height=\"40\" class=\"center\"/>\n\n<div>\n  <div id=\"myDiv\" class=\"formDiv\" #myDiv>\n    <form #checkout=\"ngForm\" (ngSubmit)=\"onSubmit(checkout)\" class=\"checkout\">\n      <div class=\"form-row\" style=\"margin: 20px\">\n        <div id=\"card-info\" #cardInfo></div>\n\n        <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\n      </div>\n\n      <button type=\"submit\" data-tid=\"elements_examples.form.pay_button\" #SubmitButton>Payer {{Amount}}</button>\n    </form>\n  </div>\n\n\n  <div class=\"success\" #loader>\n    <div class=\"icon\">\n      <svg width=\"84px\" height=\"84px\" viewBox=\"0 0 84 84\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n        <circle class=\"border\" cx=\"42\" cy=\"42\" r=\"40\" stroke-linecap=\"round\" stroke-width=\"4\" stroke=\"#000\" fill=\"none\"></circle>\n        <path class=\"checkmark\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M23.375 42.5488281 36.8840688 56.0578969 64.891932 28.0500338\" stroke-width=\"4\" stroke=\"#000\" fill=\"none\"></path>\n      </svg>\n    </div>\n    <h3 class=\"title\" data-tid=\"elements_examples.success.title\">Payment successful</h3>\n    <p class=\"message\"><span data-tid=\"elements_examples.success.message\">Thanks for trying Stripe Elements. No money was charged, but we generated a token: </span><span class=\"token\">tok_189gMN2eZvKYlo2CwTBv9KKh</span></p>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "../src/app/components/Transactions/Transactions.component.ts":
+/*!********************************************************************!*\
+  !*** ../src/app/components/Transactions/Transactions.component.ts ***!
+  \********************************************************************/
+/*! exports provided: TransactionComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionComponent", function() { return TransactionComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "../node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/database */ "../node_modules/angularfire2/database/index.js");
+/* harmony import */ var _services_parkopoly_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/parkopoly.service */ "../src/app/services/parkopoly.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+var stripe = Stripe('pk_test_u5TNHz0JoVOZETfAjKVrkIw2');
+var elements = stripe.elements();
+var TransactionComponent = /** @class */ (function () {
+    function TransactionComponent(cd, route, db, PkService) {
+        this.cd = cd;
+        this.route = route;
+        this.db = db;
+        this.PkService = PkService;
+        this.cardHandler = this.onChange.bind(this);
+        this.Amount = '';
+    }
+    TransactionComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.loader.nativeElement.style.display = 'none';
+        this.myDiv.nativeElement.style.display = 'block';
+        this.route.params.subscribe(function (params) {
+            _this.TransactionID = params['id'];
+            _this.paymentInQuestion = _this.db.object('Transactions/' + params['id']).valueChanges();
+            _this.paymentInQuestion.subscribe(function (res) {
+                _this.Amount = res['amount'] + '€';
+                _this.AmountToPay = res['amount'];
+                console.log(res);
+                if (res['payed'] === false) {
+                    _this.setNormalBlock();
+                }
+                else {
+                    _this.setSuccess();
+                }
+            });
+        });
+    };
+    TransactionComponent.prototype.ngOnDestroy = function () {
+        this.card.removeEventListener('change', this.cardHandler);
+        this.card.destroy();
+    };
+    TransactionComponent.prototype.onChange = function (_a) {
+        var error = _a.error;
+        if (error) {
+            this.error = error.message;
+        }
+        else {
+            this.error = null;
+        }
+        this.cd.detectChanges();
+    };
+    TransactionComponent.prototype.ngAfterViewInit = function () {
+        this.card = elements.create('card');
+        this.card.mount(this.cardInfo.nativeElement);
+        this.card.addEventListener('change', this.cardHandler);
+    };
+    TransactionComponent.prototype.onSubmit = function (form) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var _a, token, error;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        this.SubmitButton.nativeElement.setAttribute('disabled', 'disabled');
+                        return [4 /*yield*/, stripe.createToken(this.card)];
+                    case 1:
+                        _a = _b.sent(), token = _a.token, error = _a.error;
+                        if (error) {
+                            console.log('Something is wrong:', error);
+                        }
+                        else {
+                            this.PkService.MakePayment((this.AmountToPay * 100), token.id, 'nothing', this.TransactionID).subscribe(function (res) {
+                                _this.setSuccess();
+                            }, function (err) {
+                                console.log(JSON.stringify(err));
+                            });
+                        }
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    TransactionComponent.prototype.setSuccess = function () {
+        this.loader.nativeElement.style.display = 'block';
+        this.myDiv.nativeElement.style.display = 'none';
+    };
+    TransactionComponent.prototype.setNormalBlock = function () {
+        this.loader.nativeElement.style.display = 'none';
+        this.myDiv.nativeElement.style.display = 'block';
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('cardInfo'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], TransactionComponent.prototype, "cardInfo", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('SubmitButton'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], TransactionComponent.prototype, "SubmitButton", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('myDiv'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], TransactionComponent.prototype, "myDiv", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('loader'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], TransactionComponent.prototype, "loader", void 0);
+    TransactionComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-create-transaction',
+            template: __webpack_require__(/*! ./Transactions.component.html */ "../src/app/components/Transactions/Transactions.component.html"),
+            styles: [__webpack_require__(/*! ./Transactions.component.css */ "../src/app/components/Transactions/Transactions.component.css")],
+            providers: [_services_parkopoly_service__WEBPACK_IMPORTED_MODULE_3__["ParkopolyService"]]
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"], _services_parkopoly_service__WEBPACK_IMPORTED_MODULE_3__["ParkopolyService"]])
+    ], TransactionComponent);
+    return TransactionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../src/app/components/customer-map-follow/customer-map-follow.component.css":
+/*!***********************************************************************************!*\
+  !*** ../src/app/components/customer-map-follow/customer-map-follow.component.css ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -548,27 +754,27 @@ module.exports = ""
 
 /***/ }),
 
-/***/ "../src/app/components/create-transaction/create-transaction.component.html":
-/*!**********************************************************************************!*\
-  !*** ../src/app/components/Transactions/Transactions.component.html ***!
-  \**********************************************************************************/
+/***/ "../src/app/components/customer-map-follow/customer-map-follow.component.html":
+/*!************************************************************************************!*\
+  !*** ../src/app/components/customer-map-follow/customer-map-follow.component.html ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  Transactions works!\n</p>\n"
+module.exports = "<p>\n  customer-map-follow works!\n</p>\n"
 
 /***/ }),
 
-/***/ "../src/app/components/create-transaction/create-transaction.component.ts":
-/*!********************************************************************************!*\
-  !*** ../src/app/components/Transactions/Transactions.component.ts ***!
-  \********************************************************************************/
-/*! exports provided: TransactionComponent */
+/***/ "../src/app/components/customer-map-follow/customer-map-follow.component.ts":
+/*!**********************************************************************************!*\
+  !*** ../src/app/components/customer-map-follow/customer-map-follow.component.ts ***!
+  \**********************************************************************************/
+/*! exports provided: CustomerMapFollowComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionComponent", function() { return CreateTransactionComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerMapFollowComponent", function() { return CustomerMapFollowComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/fesm5/core.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -580,20 +786,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-var CreateTransactionComponent = /** @class */ (function () {
-    function CreateTransactionComponent() {
+var CustomerMapFollowComponent = /** @class */ (function () {
+    function CustomerMapFollowComponent() {
     }
-    CreateTransactionComponent.prototype.ngOnInit = function () {
+    CustomerMapFollowComponent.prototype.ngOnInit = function () {
     };
-    CreateTransactionComponent = __decorate([
+    CustomerMapFollowComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-create-transaction',
-            template: __webpack_require__(/*! ./Transactions.component.html */ "../src/app/components/Transactions/Transactions.component.html"),
-            styles: [__webpack_require__(/*! ./Transactions.component.css */ "../src/app/components/Transactions/Transactions.component.css")]
+            selector: 'app-customer-map-follow',
+            template: __webpack_require__(/*! ./customer-map-follow.component.html */ "../src/app/components/customer-map-follow/customer-map-follow.component.html"),
+            styles: [__webpack_require__(/*! ./customer-map-follow.component.css */ "../src/app/components/customer-map-follow/customer-map-follow.component.css")]
         }),
         __metadata("design:paramtypes", [])
-    ], CreateTransactionComponent);
-    return CreateTransactionComponent;
+    ], CustomerMapFollowComponent);
+    return CustomerMapFollowComponent;
 }());
 
 
@@ -692,7 +898,7 @@ module.exports = ".mat-elevation-z0{box-shadow:0 0 0 0 rgba(0,0,0,.2),0 0 0 0 rg
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"parent\">\n    <mat-toolbar class=\"child-top\">\n        <mat-toolbar-row>\n            <img src=\"assets/logo_pk.svg\" height=\"40\"/>\n            <div class=\"example-spacer\">\n                <form class=\"example-form\">\n                    <mat-form-field appearance=\"standard\" class=\"example-full-width\">\n                        <input  matInput ngx-google-places-autocomplete #placesRef=\"ngx-places\"    [formControl]='PlaceInputControl' (onAddressChange)=\"handleAddressChange($event)\" />\n                    </mat-form-field>\n                </form>\n            </div>\n            <mat-form-field class=\"example-icon\">\n                <mat-select placeholder=\"Ville\" [(value)]=\"selected\"  (selectionChange)=\"updateGeolocation($event.value)\">\n                    <mat-option *ngFor=\"let city of cities\" [value]=\"city.ville\">\n                        {{city.ville}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n            <mat-icon class=\"example-icon\"  matBadge=\"8\" matBadgePosition=\"after\" >notifications</mat-icon>\n            <mat-icon class=\"example-icon\" [matMenuTriggerFor]=\"appMenu\">person</mat-icon>\n        </mat-toolbar-row>\n\n        <mat-menu #appMenu=\"matMenu\">\n            <ng-template matMenuContent>\n                <button mat-menu-item>Comptes</button>\n                <button mat-menu-item>Paramètres</button>\n                <button mat-menu-item>Developpeurs</button>\n                <button mat-menu-item (click)=\"deconecte()\">Se déconnecter</button>\n            </ng-template>\n        </mat-menu>\n    </mat-toolbar>\n\n\n\n\n\n    <mat-drawer-container class=\"example-container\">\n        <mat-drawer mode=\"side\" opened class=\"sideNav\">\n            <mat-list>\n                <mat-list-item *ngFor=\"let driver of drivers | async; index as i\"    (click)=\"FollowOneUser(driver, i)\" [ngClass]=\"{'user-active': (ActiveUserIndex | async) === i}\">\n\n                    <img matListAvatar src=\"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y\" alt=\"...\">\n                    <h3 matLine> {{driver.firstname}} {{driver.lastname}} </h3>\n                    <p matLine>\n                        <span style=\"font-size:11px\"> {{driver.LastAdress}} </span>\n                    </p>\n                    <p matLine class=\"demo-2\" *ngIf=\"driver.InMoveStatus === 'Inactif' \"> Inactif depuis {{driver.lastTimeSeen | amLocale:'fr' | amTimeAgo:true}} </p>\n                    <img src=\"../../../assets/moving.svg\" class=\"right\" height=\"20\" width=\"20\" *ngIf=\"driver.InMoveStatus === 'Actif'\"/>\n                    <img src=\"../../../assets/stopped.svg\" class=\"right\" height=\"20\" width=\"20\" *ngIf=\"driver.InMoveStatus === 'Inactif'\"/>\n                </mat-list-item>\n            </mat-list>\n\n        </mat-drawer>\n\n        <mat-drawer-content>\n            <div #gmap class=\"mapColum\"></div>\n\n        </mat-drawer-content>\n    </mat-drawer-container>\n</div>"
+module.exports = "<div class=\"parent\">\n    <mat-toolbar class=\"child-top\">\n        <mat-toolbar-row>\n            <img src=\"assets/logo_pk.svg\" height=\"40\"/>\n            <div class=\"example-spacer\">\n                <form class=\"example-form\">\n                    <mat-form-field appearance=\"standard\" class=\"example-full-width\">\n                        <input  matInput ngx-google-places-autocomplete #placesRef=\"ngx-places\"    [formControl]='PlaceInputControl' (onAddressChange)=\"handleAddressChange($event)\" />\n                    </mat-form-field>\n                </form>\n            </div>\n            <mat-form-field class=\"example-icon\">\n                <mat-select placeholder=\"Ville\" [(value)]=\"selected\"  (selectionChange)=\"updateGeolocation($event.value)\">\n                    <mat-option *ngFor=\"let city of cities\" [value]=\"city.ville\">\n                        {{city.ville}}\n                    </mat-option>\n                </mat-select>\n            </mat-form-field>\n            <mat-icon class=\"example-icon\"  matBadge=\"8\" matBadgePosition=\"after\" >notifications</mat-icon>\n            <mat-icon class=\"example-icon\" [matMenuTriggerFor]=\"appMenu\">person</mat-icon>\n        </mat-toolbar-row>\n\n        <mat-menu #appMenu=\"matMenu\">\n            <ng-template matMenuContent>\n                <button mat-menu-item>Comptes</button>\n                <button mat-menu-item>Paramètres</button>\n                <button mat-menu-item>Developpeurs</button>\n                <button mat-menu-item (click)=\"deconecte()\">Se déconnecter</button>\n            </ng-template>\n        </mat-menu>\n    </mat-toolbar>\n\n\n\n\n\n    <mat-drawer-container class=\"example-container\">\n        <mat-drawer mode=\"side\" opened class=\"sideNav\">\n            <mat-list>\n                <mat-list-item *ngFor=\"let driver of drivers | async; index as i\"    (click)=\"FollowOneUser(driver, 1)\" [ngClass]=\"{'user-active': (ActiveUserIndex | async) === i}\">\n\n                    <img matListAvatar src=\"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?f=y\" alt=\"...\">\n                    <h3 matLine> {{driver.firstname}} {{driver.lastname}} </h3>\n                    <p matLine>\n                        <span style=\"font-size:11px\"> {{driver.LastAdress}} </span>\n                    </p>\n                    <p matLine class=\"demo-2\" *ngIf=\"driver.InMoveStatus === 'Inactif' \"> Inactif depuis {{driver.lastTimeSeen | amLocale:'fr' | amTimeAgo:true}} </p>\n                    <img src=\"../../../assets/moving.svg\" class=\"right\" height=\"20\" width=\"20\" *ngIf=\"driver.InMoveStatus === 'Actif'\"/>\n                    <img src=\"../../../assets/stopped.svg\" class=\"right\" height=\"20\" width=\"20\" *ngIf=\"driver.InMoveStatus === 'Inactif'\"/>\n                </mat-list-item>\n            </mat-list>\n\n        </mat-drawer>\n\n        <mat-drawer-content>\n            <div #gmap class=\"mapColum\"></div>\n\n        </mat-drawer-content>\n    </mat-drawer-container>\n</div>"
 
 /***/ }),
 
@@ -743,7 +949,7 @@ var HomeComponent = /** @class */ (function () {
         this.db = db;
         this.driversInQuery = new Map();
         this.driver = new Map();
-        this.DriversObject = new Map();
+        this.DriversObject = {};
         this.step = 'step1';
         this.Tabs = new rxjs__WEBPACK_IMPORTED_MODULE_7__["BehaviorSubject"]('step1');
         this.selected = 'Paris';
@@ -868,22 +1074,19 @@ var HomeComponent = /** @class */ (function () {
             console.log('GeoQuery has loaded and fired all other events for initial data');
         });
         this.geoQuery.on('key_entered', function (key, location, distance) {
-            if (_this.driversInQuery.get(key) === true) {
-                // console.log("ok its here");
-            }
-            else {
-                _this.db.list('users', function (ref) { return ref.orderByKey().equalTo(key); }).valueChanges().subscribe(function (res) {
-                    if (_this.driversInQuery.get(key) === true) {
-                    }
-                    else {
-                        _this.DriversObject.set(key, res[0]);
-                        var currentMarker = _this.addDriverMarker(new google.maps.LatLng(location[0], location[1]), res[0]['firstname'].charAt(0).toUpperCase() + '' + res[0]['lastname'].charAt(0).toUpperCase());
+            _this.db.list('users', function (ref) { return ref.orderByKey().equalTo(key); }).valueChanges().subscribe(function (res) {
+                if (_this.driversInQuery.get(key) === true) {
+                }
+                else {
+                    if (res[0] != null) {
+                        _this.DriversObject[key] = res[0];
+                        var currentMarker = _this.addDriverMarker(new google.maps.LatLng(location[0], location[1]), res[0].firstname.charAt(0).toUpperCase() + '' + res[0].lastname.charAt(0).toUpperCase());
                         _this.driver.set(key, currentMarker);
                         _this.addMarkerClickListner(currentMarker, key);
                         _this.driversInQuery.set(key, true);
                     }
-                });
-            }
+                }
+            });
         });
         this.geoQuery.on('key_exited', function (key, location, distance) {
             console.log(key + ' exited query to ' + location + ' (' + distance + ' km from center)');
@@ -895,13 +1098,13 @@ var HomeComponent = /** @class */ (function () {
         });
     };
     HomeComponent.prototype.getDriver = function (key) {
-        console.log(JSON.stringify(this.DriversObject.get(key)));
+        console.log(JSON.stringify(this.DriversObject[key]));
     };
     HomeComponent.prototype.addMarkerClickListner = function (marker, key) {
         var _this = this;
         google.maps.event.addListener(marker, 'click', function () {
-            var driver = _this.DriversObject.get(key);
-            console.log(JSON.stringify(_this.DriversObject.get(key)));
+            var driver = _this.DriversObject[key];
+            console.log(JSON.stringify(_this.DriversObject[key]));
         });
     };
     HomeComponent.prototype.animatedMoveTo = function (marker, newLocation) {
@@ -945,8 +1148,14 @@ var HomeComponent = /** @class */ (function () {
             }
         });
     };
+    HomeComponent.prototype.getKeyByValue = function (object, value) {
+        return Object.keys(object).find(function (key) { return object[key] === value; });
+    };
     HomeComponent.prototype.FollowOneUser = function (Driver, index) {
-        this.ActiveUserIndex.next(index);
+        //console.log(Driver)
+        //const key = _.findKey(this.DriversObject, Driver);
+        //console.log('yataaaa' + '   ' + key);
+        // this.ActiveUserIndex.next(index);
     };
     HomeComponent.prototype.addDriverMarker = function (location, name) {
         return new google.maps.Marker({
@@ -1457,8 +1666,8 @@ var ParkopolyService = /** @class */ (function () {
     ParkopolyService.prototype.connectWithParkopoly = function (username, password) {
         return this.http.post('https://us-central1-parkopoly-prod.cloudfunctions.net/LogWithParkopoly', { username: username, password: password });
     };
-    ParkopolyService.prototype.sendPaymentSms = function () {
-        return this.http.post('https://us-central1-parkopoly-prod.cloudfunctions.net/SendPaymentSsms', { lastname: 'prince', firstname: 'ondonda', phonenumber: '+33782798614', amount: 100 });
+    ParkopolyService.prototype.MakePayment = function (amount, sourceToken, description, transactionID) {
+        return this.http.post('https://us-central1-parkopoly-prod.cloudfunctions.net/MakePayment', { amount: amount, source: sourceToken, description: description, transactionID: transactionID });
     };
     ParkopolyService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
