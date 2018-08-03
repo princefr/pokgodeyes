@@ -101,8 +101,8 @@ export class ParkopolyService {
 
 
 
-  sendPaymentSms() {
-    return this.http.post('https://us-central1-parkopoly-prod.cloudfunctions.net/SendPaymentSsms', {lastname: 'prince', firstname: 'ondonda', phonenumber: '+33782798614', amount: 100});
+  MakePayment(amount, sourceToken, description, transactionID) {
+    return this.http.post('https://us-central1-parkopoly-prod.cloudfunctions.net/MakePayment', {amount: amount, source: sourceToken, description: description, transactionID: transactionID});
   }
 
 

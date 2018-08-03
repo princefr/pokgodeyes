@@ -7,6 +7,10 @@ import {
     ChangeDetectorRef, OnDestroy
 } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {AngularFireDatabase} from 'angularfire2/database';
+import {Observable} from 'rxjs';
+import {ParkopolyService} from '../../services/parkopoly.service';
 declare var Stripe: any;
 const stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 const elements = stripe.elements();
@@ -14,7 +18,8 @@ const elements = stripe.elements();
 @Component({
   selector: 'app-create-transaction',
   templateUrl: './Transactions.component.html',
-  styleUrls: ['./Transactions.component.css']
+  styleUrls: ['./Transactions.component.css'],
+    providers: [ParkopolyService]
 })
 export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -26,13 +31,28 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
     card: any;
     cardHandler = this.onChange.bind(this);
     error: string;
+    paymentInQuestion: Observable<{}>;
+    PaymentObject: object;
+    TransactionID: string;
 
 
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private cd: ChangeDetectorRef, private route: ActivatedRoute, private db: AngularFireDatabase, private PkService: ParkopolyService) { }
 
   ngOnInit() {
       this.loader.nativeElement.style.display = 'none';
       this.myDiv.nativeElement.style.display = 'block';
+      this.route.params.subscribe( params => {
+        this.TransactionID = params['id'];
+          this.paymentInQuestion =  this.db.object('Transactions/' + params['id']).valueChanges();
+          this.paymentInQuestion.subscribe(res =>  {
+            this.PaymentObject = res;
+            if (res.payed === 'false') {
+              this.setNormalBlock();
+            } else {
+                this.setSuccess();
+            }
+          });
+      });
     }
 
     ngOnDestroy(): void {
@@ -63,10 +83,11 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
         if (error) {
             console.log('Something is wrong:', error);
         } else {
-            console.log('Success!', token.id);
-            this.setSuccess();
-            // this.makePayment(token.id);
-            // ...send the token to the your backend to process the charge
+          this.PkService.MakePayment((this.PaymentObject.amount * 100),  token.id, 'nothing', this.TransactionID).subscribe(res => {
+              this.setSuccess();
+          }, (err) => {
+            console.log(JOSN.stringify(err));
+          });
         }
     }
 
@@ -77,19 +98,12 @@ export class TransactionComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    makePayment(token) {
-        stripe.charges.create({
-            amount: 2000,
-            currency: 'eur',
-            source: token, // obtained with Stripe.js
-            description: 'Charge for jenny.rosen@example.com'
-        }, function(err, charge) {
-            if (err) {
-                console.log(JSON.stringify(err));
-            } else {
-              console.log(JSON.stringify(charge));
-            }
-        });
+    setNormalBlock() {
+        this.loader.nativeElement.style.display = 'none';
+        this.myDiv.nativeElement.style.display = 'block';
     }
+
+
+
 
 }
